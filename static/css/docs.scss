@@ -1,27 +1,34 @@
 // Theme variables
 @import '../scss/docs/global-settings';
+@import '../../node_modules/cloud-vanilla-theme/scss/global-settings';
 
 // import required files
-@import '../../node_modules/cloud-vanilla-theme/scss/build';
+@import '../../node_modules/vanilla-framework/scss/vanilla';
 
 /// cloud element styles
 @import '../scss/docs/modules/base';
-// @import '../scss/docs/modules/header';
 @import '../scss/docs/modules/navigation';
 @import '../scss/docs/modules/note';
 @import '../scss/docs/modules/rows';
 @import '../scss/docs/modules/wrapper';
 @import '../scss/docs/modules/toc';
+@import '../scss/base/header';
+@import '../scss/base/footer';
 
 @mixin docs-vanilla-theme {
   @include vanilla;
   @include docs-base;
-  // @include docs-header;
   @include docs-nav;
   @include docs-notes;
   @include docs-rows;
   @include docs-wrapper;
   @include docs-toc;
+  @include maas-header;
+  @include maas-footer;
 }
 
 @include docs-vanilla-theme;
+
+.footer {
+  border-top: 1px solid $mid-grey;
+}

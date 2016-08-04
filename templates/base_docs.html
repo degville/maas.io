@@ -16,10 +16,10 @@
 		{% block head-extra %}{% endblock %}
 
 	    <!-- stylesheets -->
-	    <link rel="stylesheet" type="text/css" media="screen" href="{% versioned_static 'css/main.css' %}" />
+	    <link rel="stylesheet" type="text/css" media="screen" href="{% versioned_static 'css/docs.css' %}" />
 	</head>
 
-    <body class="{% block page_class %}{% endblock %}">
+    <body>
     	<header class="banner global" role="banner">
 	        <nav role="navigation" class="nav-primary nav-right" id="nav">
 	            <span id="main-navigation-link"><a href="#main-navigation">Jump to site nav</a></span>
@@ -39,7 +39,117 @@
                 <a href="#" class="nav-toggle__link close"></a>
             </div>
 	    </header>
-	    <div class="wrapper">
+		<div class="wrapper">
+	        <nav class="documentation__nav">
+	            <ul>
+	                <li class="expanded">
+						<a href="/docs/snaps" id="Snaps">Snaps</a>
+						<ul>
+						  <li><a href="/docs/snaps/intro" class="active" id="What-is-a-snap?">What is a snap?</a></li>
+						  <li><a href="/docs/snaps/structure" id="Snaps-directory-structure">Snaps directory structure</a></li>
+						  <li><a href="/docs/snaps/metadata" id="Metadata-YAML-file">Metadata YAML file</a></li>
+						</ul>
+					</li>
+					<li class="collapsed">
+						<a href="/docs/core" id="Core">Core</a>
+						<ul>
+							<li><a href="/docs/core/install" id="Install">Install</a></li>
+							<li><a href="/docs/core/usage" id="Usage">Usage</a></li>
+							<li><a href="/docs/core/store" id="Snap-stores">Snap stores</a></li>
+							<li><a href="/docs/core/snapd" id="The-snapd-system">The snapd system</a></li>
+							<!--          <li><a href="/docs/core/core-classic">Core &amp; Classic</a></li>-->
+							<!--          <li><a href="/docs/core/snaps">The kinds of snaps</a></li>-->
+							<li><a href="/docs/core/interfaces" id="Interfaces-(plugs-and-slots)">Interfaces (plugs and slots)</a></li>
+							<li><a href="/docs/core/updates" id="Transactional-updates">Transactional updates</a></li>
+							<li><a href="/docs/core/versions" id="Mutiple-snaps-versions-&amp;-garbage-collection">Mutiple snaps versions &amp; garbage collection</a></li>
+						</ul>
+					</li>
+					<li class="collapsed">
+						<a href="/docs/build-snaps" id="Build-snaps">Build snaps</a>
+						<ul>
+							<li><a href="/docs/build-snaps/your-first-snap" id="Your-first-snap">Your first snap</a></li>
+							<li><a href="/docs/build-snaps/syntax" id="Snapcraft-syntax">Snapcraft syntax</a></li>
+							<li><a href="/docs/build-snaps/parts" id="Parts">Parts</a></li>
+							<li><a href="/docs/build-snaps/plugins" id="Plugins">Plugins</a></li>
+							<li><a href="/docs/build-snaps/metadata" id="Commands,-daemons
+							and-assets">Commands, daemons<br>and assets</a></li>
+							<li><a href="/docs/build-snaps/debugging" id="Debugging">Debugging</a></li>
+							<li><a href="/docs/build-snaps/publish" id="Publish-your-snap">Publish your snap</a></li>
+							<li><a href="/docs/build-snaps/advanced-features" id="Advanced-features">Advanced features</a></li>
+						</ul>
+					</li>
+					<li class="collapsed">
+						<a href="/docs/reference" id="Reference">Reference</a>
+						<ul>
+							<li><a href="/docs/reference/snapcraft" id="Snapcraft">Snapcraft</a></li>
+							<li><a href="/docs/reference/plugins" id="Plugins">Plugins</a></li>
+							<li><a href="/docs/reference/interfaces" id="Interfaces">Interfaces</a></li>
+						</ul>
+					</li>
+				</ul>
+	            <script>
+	                function expandCollapse(clickEvent) {
+	                    var item = clickEvent.target;
+	                    var link = item.querySelector('[href]');
+	                    var linkWidth = link.offsetWidth;
+	                    var clickOffset = clickEvent.offsetX;
+
+	                    if (clickOffset > linkWidth) {
+	                        collapsed = ! item.classList.toggle('expanded');
+	                        item.classList.toggle('collapsed', collapsed);
+	                    }
+	                }
+
+	                var items = document.querySelectorAll('.documentation__nav ul li');
+
+	                for(var num = 0; num < items.length; num++) {
+	                    var item = items[num];
+	                    var link = item.querySelector('[href]');
+
+	                    if (! link) {continue;}
+
+	                    // Get paths, removing leading and trailing slashes for consistency
+	                    linkPath = link.pathname.replace(/(^\/|\/$)/g, "");
+	                    currentPath = location.pathname.replace(/(^\/|\/$)/g, "");
+
+	                    // Make current navigation item appear active
+	                    // @TODO: Replace this with a static JS-less solution
+	                    //        once we have a more intelligent
+	                    //        docs navigation mechanism.
+	                    if (linkPath == currentPath) {
+	                        link.classList.add('active');
+	                    }
+
+	                    // For lists with child lists, add expand/collapse functionality
+	                    if (item.querySelector('ul')) {
+	                        if (currentPath.startsWith(linkPath)) {
+	                            item.classList.add('expanded');
+	                        } else {
+	                            item.classList.add('collapsed');
+	                        }
+
+	                        item.addEventListener('click', expandCollapse);
+	                    }
+	                }
+	            </script>
+	        </nav>
+			<main id="main-content" class="inner-wrapper">
+	            <div class="row">
+					<h1>test</h1>
+				</div>
+			</main>
+			<aside class="toc">
+	           <h4 class="toc__heading">Contents</h4>
+	           <nav role="navigation">
+	              <ol class="toc__list">
+		              <li><a href="#installation">Installation</a></li>
+		              <li><a href="#configuring">Configuring</a></li>
+		              <li><a href="#testing-your-setup">Testing your setup</a></li>
+	              </ol>
+	           </nav>
+	        </aside>
+		</div>
+	    <!-- <div class="wrapper">
 	        <div id="main-content">
 				<div class="row docs">
 					<div class="inner-wrapper">
@@ -52,7 +162,7 @@
 					</div>
 				</div>
 			</div>
-		</div>
+		</div> -->
 	    <footer class="footer clearfix">
 			<div class="inner-wrapper">
 				<div class="footer__col">
