@@ -1,0 +1,27 @@
+// Theme variables
+@import '../scss/docs/global-settings';
+
+// import required files
+@import '../../node_modules/cloud-vanilla-theme/scss/build';
+
+/// cloud element styles
+@import '../scss/docs/modules/base';
+// @import '../scss/docs/modules/header';
+@import '../scss/docs/modules/navigation';
+@import '../scss/docs/modules/note';
+@import '../scss/docs/modules/rows';
+@import '../scss/docs/modules/wrapper';
+@import '../scss/docs/modules/toc';
+
+@mixin docs-vanilla-theme {
+  @include vanilla;
+  @include docs-base;
+  // @include docs-header;
+  @include docs-nav;
+  @include docs-notes;
+  @include docs-rows;
+  @include docs-wrapper;
+  @include docs-toc;
+}
+
+@include docs-vanilla-theme;
